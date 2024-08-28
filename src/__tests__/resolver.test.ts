@@ -291,14 +291,15 @@ describe("Patient Mutations", () => {
     it("should update and return a patient", async () => {
       const updatedPatient = {
         id: "13",
-        contactInfo: { phone: "987654321", email: "john.doe@example.com" },
+        contactInfo: {
+          id: "contactId",
+        },
         dateOfBirth: "1990-01-01",
         firstName: "John",
         lastName: "Doe",
         gender: "Male",
       };
 
-      // Mock Manager.findOneBy untuk mengembalikan pasien yang ada
       jest
         .spyOn(Manager, "findOneBy")
         .mockImplementation((entity: any, criteria: any) => {
@@ -322,7 +323,6 @@ describe("Patient Mutations", () => {
           return Promise.resolve(null);
         });
 
-      // Mock Manager.update untuk tidak melakukan apa-apa dan kembali dengan hasil yang sesuai
       jest
         .spyOn(Manager, "update")
         .mockImplementation((entity: any, id: any, data: any) => {
@@ -347,21 +347,10 @@ describe("Patient Mutations", () => {
         {} as any
       );
 
-      // Sesuaikan hasil yang diharapkan dengan format yang dikembalikan
-      expect(result).toEqual({
-        id: "13",
-        contactInfo: {
-          id: "contactId", // Memastikan bahwa contactInfo.id adalah yang diharapkan
-        },
-        dateOfBirth: "1990-01-01",
-        firstName: "John",
-        lastName: "Doe",
-        gender: "Male",
-      });
+      expect(result).toEqual(updatedPatient);
     });
 
     it("should throw an error if patient update fails", async () => {
-      // Mock Manager.findOneBy untuk mengembalikan pasien yang ada
       jest
         .spyOn(Manager, "findOneBy")
         .mockImplementation((entity: any, criteria: any) => {
@@ -379,7 +368,6 @@ describe("Patient Mutations", () => {
           return Promise.resolve(null);
         });
 
-      // Mock Manager.update untuk menolak dengan error
       jest
         .spyOn(Manager, "update")
         .mockRejectedValue(new Error("Update error"));
@@ -419,7 +407,6 @@ describe("Patient Mutations", () => {
         gender: "Male",
       };
 
-      // Mock Manager.findOneBy untuk mengembalikan pasien yang ada
       jest
         .spyOn(Manager, "findOneBy")
         .mockImplementation((entity: any, criteria: any) => {
@@ -429,7 +416,6 @@ describe("Patient Mutations", () => {
           return Promise.resolve(null);
         });
 
-      // Mock Manager.remove untuk tidak melakukan apa-apa dan kembali dengan hasil yang sesuai
       jest
         .spyOn(Manager, "remove")
         .mockImplementation((entity: any, data: any) => {
@@ -451,7 +437,6 @@ describe("Patient Mutations", () => {
     });
 
     it("should throw an error if patient not found", async () => {
-      // Mock Manager.findOneBy untuk mengembalikan null (pasien tidak ditemukan)
       jest
         .spyOn(Manager, "findOneBy")
         .mockImplementation((entity: any, criteria: any) => {
@@ -484,7 +469,6 @@ describe("Patient Mutations", () => {
         gender: "Male",
       };
 
-      // Mock Manager.findOneBy untuk mengembalikan pasien yang ada
       jest
         .spyOn(Manager, "findOneBy")
         .mockImplementation((entity: any, criteria: any) => {
@@ -494,7 +478,6 @@ describe("Patient Mutations", () => {
           return Promise.resolve(null);
         });
 
-      // Mock Manager.remove untuk menolak dengan error
       jest
         .spyOn(Manager, "remove")
         .mockRejectedValue(new Error("Deletion error"));
@@ -524,7 +507,6 @@ describe("Doctor Mutations", () => {
         name: "Dr. Smith",
       };
 
-      // Mock Manager.save untuk mengembalikan dokter yang disimpan
       jest
         .spyOn(Manager, "save")
         .mockImplementation((entity: any, data: any) => {
@@ -577,7 +559,6 @@ describe("Doctor Mutations", () => {
         name: "Dr. Smith Updated",
       };
 
-      // Mock Manager.findOneBy untuk mengembalikan dokter yang ada
       jest
         .spyOn(Manager, "findOneBy")
         .mockImplementation((entity: any, criteria: any) => {
@@ -590,7 +571,6 @@ describe("Doctor Mutations", () => {
           return Promise.resolve(null);
         });
 
-      // Mock Manager.save untuk tidak melakukan apa-apa dan kembali dengan hasil yang sesuai
       jest
         .spyOn(Manager, "save")
         .mockImplementation((entity: any, data: any) => {
@@ -676,7 +656,6 @@ describe("Doctor Mutations", () => {
         name: "Dr. Smith",
       };
 
-      // Mock Manager.findOneBy untuk mengembalikan dokter yang ada
       jest
         .spyOn(Manager, "findOneBy")
         .mockImplementation((entity: any, criteria: any) => {
@@ -686,7 +665,6 @@ describe("Doctor Mutations", () => {
           return Promise.resolve(null);
         });
 
-      // Mock Manager.remove untuk tidak melakukan apa-apa dan kembali dengan hasil yang sesuai
       jest
         .spyOn(Manager, "remove")
         .mockImplementation((entity: any, data: any) => {
@@ -788,7 +766,6 @@ describe("Appointment Mutations", () => {
         patient: patientEntity,
       };
 
-      // Mock Manager.findOneBy untuk doctor
       jest
         .spyOn(Manager, "findOneBy")
         .mockImplementation((entity: any, criteria: any) => {
@@ -798,7 +775,6 @@ describe("Appointment Mutations", () => {
           return Promise.resolve(null);
         });
 
-      // Mock Manager.findOne untuk patient
       jest
         .spyOn(Manager, "findOne")
         .mockImplementation((entity: any, options: any) => {
@@ -808,7 +784,6 @@ describe("Appointment Mutations", () => {
           return Promise.resolve(null);
         });
 
-      // Mock Manager.save untuk appointment
       jest
         .spyOn(Manager, "save")
         .mockImplementation((entity: any, data: any) => {
