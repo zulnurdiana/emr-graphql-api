@@ -1,0 +1,110 @@
+type Patient {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  dateOfBirth: String!
+  gender: String!
+  contactInfo: ContactInfo!
+  appointments: [Appointment]!
+  medicalHistory: [MedicalHistory]!
+  medications: [Medication]!
+}
+
+type ContactInfo {
+  phone: String!
+  email: String!
+}
+
+type Appointment {
+  id: ID!
+  date: String!
+  doctor: Doctor!
+  reason: String!
+  notes: String
+}
+
+type Doctor {
+  id: ID!
+  name: String!
+  appointments: [Appointment]!
+}
+
+type MedicalHistory {
+  id: ID!
+  condition: String!
+  diagnosisDate: String!
+  status: String!
+}
+
+type Medication {
+  id: ID!
+  name: String!
+  dosage: String!
+  frequency: String!
+}
+
+type Query {
+  Patient(id: ID!): Patient
+  Doctor(id: ID!): Doctor
+  Medical(id: ID!): Patient
+}
+
+input ContactInfoInput {
+  phone: String!
+  email: String!
+}
+
+input PatientInput {
+  firstName: String!
+  lastName: String!
+  dateOfBirth: String!
+  gender: String!
+}
+
+type DeleteAppointmentResponse {
+  success: Boolean!
+}
+
+type Mutation {
+  createPatient(
+    firstName: String!
+    lastName: String!
+    dateOfBirth: String!
+    gender: String!
+    contactInfo: ContactInfoInput!
+  ): Patient
+  updatePatient(
+    id: ID!
+    patient: PatientInput!
+    contact: ContactInfoInput
+  ): Patient
+  deletePatient(id: ID!): Patient
+
+  createDoctor(name: String!): Doctor
+  deleteDoctor(id: ID!): Doctor
+
+  updateDoctor(id: ID!, name: String!): Doctor
+  createAppointment(
+    date: String!
+    reason: String!
+    notes: String
+    doctorId: ID!
+    patientId: ID!
+  ): Appointment
+
+  disableAppointment(id: ID!): Appointment
+
+  createMedicalHistory(
+    condition: String!
+    diagnosisDate: String!
+    status: String!
+    patientId: ID!
+  ): MedicalHistory
+
+  createMedication(
+    name: String!
+    dosage: String!
+    frequency: String!
+    patientId: ID!
+  ): Medication
+}
