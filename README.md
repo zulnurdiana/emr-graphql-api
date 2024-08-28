@@ -20,8 +20,43 @@ This project uses NPM as package manager
   docker -v
   docker-compose -v
 
+## :file_folder: Project Structure
 
+The project structure is as follows:
 
+```sh
+EMR-GRAPHQL-API/
+│
+├── node_modules/          # Node.js dependencies
+├── src/                   # Source code
+│   ├── __tests__/         # Unit tests
+│   │   └── resolver.test.ts
+│   ├── entity/            # TypeORM entities
+│   │   ├── Appointment.entity.ts
+│   │   ├── ContactInfo.entity.ts
+│   │   ├── Doctor.entity.ts
+│   │   ├── MedicalHistory.entity.ts
+│   │   ├── Medication.entity.ts
+│   │   └── Patient.entity.ts
+│   ├── lib/               # Utility functions
+│   │   ├── Manager.ts
+│   │   ├── data-source.ts
+│   │   ├── index.ts
+│   │   ├── resolver.ts
+│   │   ├── schema.graphql
+│   │   ├── schema.ts
+│   │   └── types.ts
+├── .dockerignore          # Files to ignore in Docker builds
+├── .env                   # Environment variables
+├── .gitignore             # Files to ignore in git
+├── codegen.ts             # GraphQL codegen configuration
+├── docker-compose.yml     # Docker Compose configuration
+├── Dockerfile             # Docker image configuration
+├── jest.config.js         # Jest configuration
+├── package-lock.json      # NPM lock file
+├── package.json           # NPM package configuration
+└── tsconfig.json          # TypeScript configuration
+```
 
 ### :running: Run Locally With NPM
 
@@ -77,7 +112,7 @@ Follow this step to run this repostory code in your local device:
 
 <!-- TechStack -->
 ### :space_invader: Tech Stack
-  <h4>BackEnd:</h4>
+  <h4>Backend:</h4>
   <img src="https://img.shields.io/badge/-GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white" />
   <img src="https://img.shields.io/badge/-ApolloGraphQL-311C87?style=for-the-badge&logo=apollo-graphql" />
   <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" />
@@ -87,5 +122,6 @@ Follow this step to run this repostory code in your local device:
 
 <h4>Tools:</h4>
   <img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white" />
+  <img src="https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white" />
   <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" />
   <img src="https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white" />
