@@ -39,13 +39,13 @@ EMR-GRAPHQL-API/
 │   │   ├── Medication.entity.ts
 │   │   └── Patient.entity.ts
 │   ├── lib/               # Utility functions
-│   │   ├── Manager.ts
-│   │   ├── data-source.ts
-│   │   ├── index.ts
-│   │   ├── resolver.ts
-│   │   ├── schema.graphql
-│   │   ├── schema.ts
-│   │   └── types.ts
+│   │   └── Manager.ts     # Manages data operations and entity interactions
+│   ├── data-source.ts     # DataSource configuration
+│   ├── index.ts           # Entry point for the application
+│   ├── resolver.ts        # GraphQL resolvers
+│   ├── schema.graphql     # GraphQL schema definition
+│   ├── schema.ts          # TypeScript types for the schema
+│   └── types.ts           # Common TypeScript types
 ├── .dockerignore          # Files to ignore in Docker builds
 ├── .env                   # Environment variables
 ├── .gitignore             # Files to ignore in git
